@@ -29,6 +29,8 @@ variable "severity" { default = "Warning"}
 variable "warning_description" {default ="Warning threshold has been breached."}
 variable "critical_description" {default ="Critical threshold has been breached."}
 
+variable "disable_detector" {default = "false"}
+
 variable "custom_email_body" {
 	default = <<-EOF
 		{{#if anomalous}}
@@ -87,6 +89,7 @@ resource "signalfx_detector" "detector_zee_custom_static" {
     parameterized_subject = var.custom_email_subject
     runbook_url   = var.custom_runbook_url
     tip           = var.custom_tip_message
+    disabled      = var.disable_detector
   }
   rule {
     description   = "${var.critical_description}"
@@ -97,6 +100,7 @@ resource "signalfx_detector" "detector_zee_custom_static" {
     parameterized_subject = var.custom_email_subject
     runbook_url   = var.custom_runbook_url
     tip           = var.custom_tip_message
+    disabled      = var.disable_detector
   }
 
   viz_options {
@@ -123,5 +127,6 @@ resource "signalfx_detector" "detector_zee_custom_dynamic" {
     parameterized_subject = var.custom_email_subject
     runbook_url   = var.custom_runbook_url
     tip           = var.custom_tip_message
+    disabled      = var.disable_detector
  }
 }

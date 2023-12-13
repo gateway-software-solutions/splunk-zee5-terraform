@@ -84,6 +84,8 @@ variable "custom_tip_message" {
   default = "any message to be shown as tip or helping text"
 }
 
+variable "disable_detector" {default = "false"}
+
 resource "signalfx_detector" "detector_zee_custom" {
   name        = "${var.alert_name}-${var.application_name}"
   description = "Detector created using terraform for service ${var.application_name}"
@@ -120,6 +122,7 @@ resource "signalfx_detector" "detector_zee_custom" {
     parameterized_subject = var.custom_email_subject
     runbook_url   = var.custom_runbook_url
     tip           = var.custom_tip_message
+    disabled      = var.disable_detector
   }
   rule {
     description   = "${var.critical_description}"
@@ -130,6 +133,7 @@ resource "signalfx_detector" "detector_zee_custom" {
     parameterized_subject = var.custom_email_subject
     runbook_url   = var.custom_runbook_url
     tip           = var.custom_tip_message
+    disabled      = var.disable_detector
   }
 
   viz_options {
