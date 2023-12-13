@@ -16,6 +16,7 @@ module "UAT-Zee5-Singleapiplayback-4xx-Error-Rate" {
           detect(when(C > 12,'2m',1.0), mode='split').publish('4xx_Error_%_Critical')
       EOF
   custom_email_body = null
+  disable_detector  = "true"
 }
 
 module "UAT-Zee5-Singleapiplayback-5xx-Error-Rate" {
