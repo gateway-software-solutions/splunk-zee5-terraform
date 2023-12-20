@@ -25,7 +25,7 @@ module "UAT-Zee5-Singleapiplayback-5xx-Error-Rate" {
   metric_label     = "5xxErrorPercent"
   alert_name       = "5xx_Error_%"
   display_unit     = null
-  email_list       = ["Email,mayank.gupta@gssltd.co.in", "Email,mail@gssltd.co.in"]
+  email_list       = ["Email,mayank.gupta@gssltd.co.in", "VictorOps,GBSvLbZCEAE,testing"]
   warning_description = "5xx error rate has been greater than 1% for last 3 minutes"
   critical_description = "5xx error rate has been greater than 2% for last 2 minutes"
   splunk_query     = <<-EOF
@@ -37,6 +37,7 @@ module "UAT-Zee5-Singleapiplayback-5xx-Error-Rate" {
           detect(when(C > 2,'2m',1.0), mode='split').publish('5xx_Error_%_Critical')
       EOF
   custom_email_body = null
+  disable_detector  = "true"
 }
 
 module "UAT-Zee5-Singleapiplayback-Error-Rate" {
