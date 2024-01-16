@@ -102,7 +102,7 @@ resource "signalfx_detector" "detector_zee_custom" {
             error_weight     = (error_durations * error_counts).sum(over='1m')
             non_error_weight = (non_error_durations * non_error_counts).sum(over='1m')
 
-            total_weight = combine((error_weight if error_weight is not None else 0) + (non_error_weight if non_error_weight is not None else 0)).sum(over='1m')
+            total_weight = combine((error_weight if error_weight is not None else 0) + (non_error_weight if non_error_weight is not None else 0))
             total = combine((error_counts if error_counts is not None else 0) + (non_error_counts if non_error_counts is not None else 0)).sum(over='1m')
             return (total_weight / total)
 
